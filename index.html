@@ -1,218 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="favicon.png">
-    <title>Repo Catalog</title>
-    <style>
-        body {
-            margin: 0;
-            min-height: 100vh;
-            background: #1a1a1a;
-            color: white;
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 6rem 2rem; /* Moderate top/bottom padding */
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: #4CAF50;
-            font-size: 2.5rem;
-        }
-
-        .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 1.5rem 6rem; /* Vertical: 1.5rem | Horizontal: 6rem */
-            max-width: 1200px;
-            width: 100%;
-            padding: 0 2rem;
-            box-sizing: border-box;
-        }
-
-        .monster-card {
-            background: #2d2d2d;
-            border-radius: 12px;
-            padding: 2.5rem;
-            transition: transform 0.3s;
-            text-align: center;
-            width: 100%;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-        }
-
-        .monster-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 10px 24px rgba(0,0,0,0.3);
-        }
-
-        .monster-image {
-            width: 100%;
-            height: 240px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-        }
-
-        .monster-details {
-            padding: 1.5rem;
-            text-align: center;
-        }
-
-        h2 {
-            margin: 0 0 1rem 0;
-            font-size: 1.5rem;
-            color: #4CAF50;
-        }
-
-        p {
-            margin: 0;
-            line-height: 1.6;
-            font-size: 1rem;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Repo Catalog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Poppins Font for Edit-Page style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,700,800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body, input, button, footer {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+    }
+    body {
+      background: #191919;
+      color: #f5f5f5;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      padding: 32px 0 0 0;
+      z-index: 1;
+    }
+    .page-title-edit {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0;
+      position: relative;
+    }
+    .page-title-edit h2 {
+      font-size: 34px;
+      font-weight: 800;
+      text-align: center;
+      color: #ececec;
+      text-shadow: 0 2px 4px rgba(20,20,20,0.7);
+      margin: 0;
+      padding: 0 10px 0 0;
+      background: none;
+      border: none;
+      outline: none;
+      cursor: text;
+    }
+    .wave-bg {
+      position: relative;
+      width: 100vw;
+      margin-bottom: -7vw;
+      z-index: 0;
+      pointer-events: none;
+      min-height: 80px;
+      max-height: 160px;
+      overflow: hidden;
+    }
+    .catalog-list {
+      width: 100vw;
+      max-width: none;
+      min-height: 60vh;
+      background: #222;
+      border-radius: 0 0 16px 16px;
+      box-shadow: 0 4px 32px 0 rgba(0,0,0,0.16);
+      margin: 0 0 40px 0;
+      padding: 44px 6vw 44px 6vw;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem 3rem;
+      z-index: 2;
+      position: relative;
+    }
+    .monster-card {
+      background: rgba(50, 50, 50, 0.84);
+      border: 2px solid #686868;
+      border-radius: 10px;
+      box-shadow: 0 4px 18px 0 rgba(0,0,0,0.08);
+      color: #fff;
+      padding: 18px 28px;
+      font-size: 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      transition: box-shadow 0.2s, border 0.2s, background 0.18s, transform 0.18s;
+      position: relative;
+      align-items: center;
+      text-align: center;
+    }
+    .monster-card:hover {
+      background: rgba(70,70,70,0.92);
+      box-shadow: 0 8px 36px 0 #000a;
+      border-color: #aaa;
+      transform: scale(1.034);
+      z-index: 5;
+    }
+    .monster-image {
+      width: 100%;
+      max-width: 220px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      background: #111;
+      box-shadow: 0 2px 12px #0004;
+    }
+    .monster-details {
+      padding: 1.5rem 0 0 0;
+      text-align: center;
+    }
+    h2 {
+      margin: 0 0 1rem 0;
+      font-size: 1.5rem;
+      color: #4CAF50;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      text-shadow: 0 1px 2px #000a;
+    }
+    p {
+      margin: 0;
+      line-height: 1.6;
+      font-size: 1.04rem;
+      color: #ccc;
+    }
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #1a1a1a;
+      padding: 10px 0;
+      text-align: center;
+      font-size: 14px;
+      color: #888;
+      z-index: 999;
+      border-top: 1px solid #222;
+      min-height: 36px;
+    }
+    @media (max-width: 700px) {
+      .catalog-list {
+        padding: 12px 2vw 12px 2vw;
+        grid-template-columns: 1fr;
+      }
+      .monster-card {
+        padding: 10px 4vw;
+      }
+      .monster-image {
+        height: 150px;
+        max-width: 98vw;
+      }
+      .wave-bg {
+        min-height: 40px;
+        max-height: 70px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Repo Catalog</h1>
+  <div class="main-content">
+    <div class="page-title-edit">
+      <h2>Repo Catalog</h2>
     </div>
-    <div class="container" id="monster-list"></div>
+    <div class="wave-bg" aria-hidden="true">
+      <svg viewBox="0 0 1440 160" width="100%" height="100%" preserveAspectRatio="none" style="display:block;">
+        <defs>
+          <linearGradient id="wavegrad1" x1="0" y1="0" x2="1" y2="0">
+            <stop stop-color="#232323" offset="0%" />
+            <stop stop-color="#232323" offset="100%" />
+          </linearGradient>
+          <linearGradient id="wavegrad2" x1="0" y1="0" x2="1" y2="0">
+            <stop stop-color="#252525" offset="0%" />
+            <stop stop-color="#282828" offset="100%" />
+          </linearGradient>
+        </defs>
+        <path d="M0,40 Q360,120 720,80 T1440,120 V160 H0 Z" fill="url(#wavegrad1)" opacity="0.85"/>
+        <path d="M0,80 Q360,160 720,120 T1440,150 V160 H0 Z" fill="url(#wavegrad2)" opacity="0.6"/>
+      </svg>
+    </div>
+  </div>
+  <div class="catalog-list" id="monster-list"></div>
+  <footer>
+    &copy; 2025 Repo Catalog. Styled like Edit-Page.
+  </footer>
+  <script>
+    const container = document.getElementById('monster-list');
+    const monsters = [
+      { id: 2, name: 'Labarentiu', description: 'fein dein fwaeh type shit type shit', image: 'labarentiu.png' },
+      { id: 3, name: 'Puscas', description: 'Puscas Pamfil e gorila besinoasa, temnitz, gras, cacacios', image: 'puscas.png' },
+      { id: 4, name: 'Bojan', description: '', image: 'bojan.png' },
+      { id: 1, name: 'Adelina', description: 'NIKOTIIIIN GIVE ME NIKOTIIIN', image: 'adelina.png' },
+      { id: 5, name: 'Sabou', description: '', image: 'sabou.png' },
+      { id: 6, name: 'Enculescu', description: 'NOOOO MY BOUL STAR BROOOO', image: 'enculescu.png' },
+      { id: 7, name: 'Nicotina Leta Bambieta', description: '', image: 'leta.png' },
+      { id: 8, name: 'Timocars', description: '', image: 'timoace.png' },
+      { id: 9, name: 'Profa de Bio', description: '', image: 'bio.png' },
+      { id: 10, name: 'Bance', description: 'DISPOZITIVUL MEU CELULAR PERSONAL', image: 'bancoi.png' },
+      { id: 11, name: 'Budulica', description: 'Budulica fara frica', image: 'budu.png' },
+      { id: 12, name: 'BIG Radu', description: '', image: 'big.png' },
+      { id: 13, name: 'Sebyca', description: '', image: 'seby.png' },
+      { id: 14, name: 'Boitor', description: '', image: 'boitor.png' },
+      { id: 15, name: 'Benonel', description: '', image: 'benone.png' },
+      { id: 16, name: 'Pekos', description: '', image: '1000.png' },
+      { id: 17, name: 'Check Penis', description: '', image: 'penis.png' },
+      { id: 18, name: 'Spân Casian', description: '', image: 'span.png' }
+    ];
 
-    <script>
-        const container = document.getElementById('monster-list');
-        const monsters = [
-            {
-                id: 2,
-                name: 'Labarentiu',
-                description: 'fein dein fwaeh type shit type shit',
-                image: 'labarentiu.png'
-            },
-            {
-                id: 3,
-                name: 'Puscas',
-                description: 'Puscas Pamfil e gorila besinoasa, temnitz, gras, cacacios',
-                image: 'puscas.png'
-            },
-            {
-                id: 4,
-                name: 'Bojan',
-                description: '',
-                image: 'bojan.png'
-            },
-            {
-                id: 1,
-                name: 'Adelina',
-                description: 'NIKOTIIIIN GIVE ME NIKOTIIIN',
-                image: 'adelina.png'
-            },
-            {
-                id: 5,
-                name: 'Sabou',
-                description: '',
-                image: 'sabou.png'
-            },
-            {
-                id: 6,
-                name: 'Enculescu',
-                description: 'NOOOO MY BOUL STAR BROOOO',
-                image: 'enculescu.png'
-            },
-            {
-                id: 7,
-                name: 'Nicotina Leta Bambieta',
-                description: '',
-                image: 'leta.png'
-            },
-            {
-                id: 8,
-                name: 'Timocars',
-                description: '',
-                image: 'timoace.png'
-            },
-            {
-                id: 9,
-                name: 'Profa de Bio',
-                description: '',
-                image: 'bio.png'
-            },
-            {
-                id: 10,
-                name: 'Bance',
-                description: 'DISPOZITIVUL MEU CELULAR PERSONAL',
-                image: 'bancoi.png'
-            },
-            {
-                id: 11,
-                name: 'Budulica',
-                description: 'Budulica fara frica',
-                image: 'budu.png'
-            },
-            {
-                id: 12,
-                name: 'BIG Radu',
-                description: '',
-                image: 'big.png'
-            },
-            {
-                id: 13,
-                name: 'Sebyca',
-                description: '',
-                image: 'seby.png'
-            },
-            {
-                id: 14,
-                name: 'Boitor',
-                description: '',
-                image: 'boitor.png'
-            },
-            {
-                id: 15,
-                name: 'Benonel',
-                description: '',
-                image: 'benone.png'
-            },
-            {
-                id: 16,
-                name: 'Pekos',
-                description: '',
-                image: '1000.png'
-            },
-            {
-                id: 17,
-                name: 'Check Penis',
-                description: '',
-                image: 'penis.png'
-            },
-            {
-                id: 18,
-                name: 'Spân Casian',
-                description: '',
-                image: 'span.png'
-            }
-        ];
+    function renderMonsters() {
+      container.innerHTML = '';
+      monsters.forEach(monster => {
+        const card = document.createElement('div');
+        card.className = 'monster-card';
+        card.innerHTML = `
+          <img class="monster-image" src="${monster.image}" alt="${monster.name}">
+          <div class="monster-details">
+            <h2>${monster.name}</h2>
+            <p>${monster.description}</p>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
 
-        function renderMonsters() {
-            container.innerHTML = '';
-            monsters.forEach(monster => {
-                const card = document.createElement('div');
-                card.className = 'monster-card';
-                card.innerHTML = `
-                    <img class="monster-image" src="${monster.image}" alt="${monster.name}">
-                    <div class="monster-details">
-                        <h2>${monster.name}</h2>
-                        <p>${monster.description}</p>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        renderMonsters();
-    </script>
+    renderMonsters();
+  </script>
 </body>
 </html>
